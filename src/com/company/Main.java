@@ -26,8 +26,7 @@ public class Main {
         }
     }
 
-    public static boolean isWord(String word){
-        //System.out.println("Working on a word : " + word);
+    public static boolean isWord(String word) {
         word = replacedWord(word);
         char charsArray[] = word.toLowerCase().toCharArray();
         char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
@@ -39,8 +38,6 @@ public class Main {
                     counter++;
                 }
         }
-        //System.out.println("Word as array length : " + charsArray.length);
-        //System.out.println("Counter: " + counter);
         if (counter != 0 && counter == charsArray.length)
             return true;
         return false;
