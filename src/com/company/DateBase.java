@@ -8,7 +8,7 @@ public class DateBase {
     static final String DB_URL = "jdbc:mysql://localhost/dictionary";
 
     static final String USER = "root";
-    static final String PASS = "!@Test1234#$";
+    static final String PASS = "root";
 
     public Connection getConnection() throws ClassCastException, SQLException {
         Connection conn = null;
