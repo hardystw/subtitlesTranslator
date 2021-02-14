@@ -1,12 +1,14 @@
 package com.company;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.util.HashSet;
-
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SQLException {
+        DateBase db = new DateBase();
+        int idCounter = db.selectLastId();
         HashSet<String> dictionary = new HashSet<String>();
         File file = new File("D:\\Non-Stop.1996.JAPANESE.1080p.BluRay.H264.AAC-VXT.srt");
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
@@ -21,9 +23,11 @@ public class Main {
                 }
             }
         }
-        for (String engWord : dictionary) {
-            System.out.println(engWord);
-        }
+        //for (String engWord : dictionary) {
+        //System.out.println(engWord);
+        //}
+        //db.insertData(idCounter, dictionary);
+        System.out.println("Data sucessfully has been inserted into database");
     }
 
     public static boolean isWord(String word) {
