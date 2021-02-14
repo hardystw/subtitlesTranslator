@@ -7,10 +7,9 @@ import java.util.HashSet;
 public class Main {
 
     public static void main(String[] args) throws IOException, SQLException {
-        DateBase db = new DateBase();
-        int idCounter = db.selectLastId();
+        String pathname = getFilePath();
         HashSet<String> dictionary = new HashSet<String>();
-        File file = new File("D:\\Non-Stop.1996.JAPANESE.1080p.BluRay.H264.AAC-VXT.srt");
+        File file = new File(pathname);
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
         String line;
         while ((line = reader.readLine()) != null)
@@ -23,10 +22,9 @@ public class Main {
                 }
             }
         }
-        //for (String engWord : dictionary) {
-        //System.out.println(engWord);
-        //}
-        //db.insertData(idCounter, dictionary);
+        DateBase db = new DateBase();
+        int lastID = db.selectLastId();
+        db.insertData(lastID, dictionary);
         System.out.println("Data sucessfully has been inserted into database");
     }
 
@@ -53,5 +51,17 @@ public class Main {
             word = word.replace(replacableChars[i], "");
         }
         return word;
+    }
+
+    public static String getFilePath() {
+        String filepath = "INCORRECT_FILE_PATH";
+        System.out.println("Paste filepath: ");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            filepath = reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return filepath;
     }
 }

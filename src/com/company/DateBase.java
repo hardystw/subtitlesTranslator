@@ -8,12 +8,12 @@ public class DateBase {
     static final String DB_URL = "jdbc:mysql://localhost/dictionary";
 
     static final String USER = "root";
-    static final String PASS = "root";
+    static final String PASS = "!@Test1234#$";
 
     public Connection getConnection() throws ClassCastException, SQLException {
         Connection conn = null;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName(JDBC_DRIVER);
             System.out.println("Connecting to a selected database...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             System.out.println("Connected database successfully...");
@@ -34,10 +34,11 @@ public class DateBase {
     }
 
     public void insertData(int lastId, HashSet<String> dictionary) throws SQLException {
+        Statement statement = getStatement();
         for (String engWord : dictionary) {
             lastId++;
             String sql = String.format("INSERT INTO russianenglish VALUES (%d, '%s', null)", lastId, engWord);
-            getStatement().executeUpdate(sql);
+            statement.executeUpdate(sql);
         }
 
     }
@@ -48,7 +49,6 @@ public class DateBase {
         ResultSet resultSet = getStatement().executeQuery(sql);
         while (resultSet.next()) {
             id = resultSet.getInt("id");
-            System.out.println(id);
         }
         resultSet.close();
         return id;
